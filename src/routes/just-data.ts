@@ -1,8 +1,8 @@
 import { Request, Response, Router } from 'express';
 
-export const mergeConcatSwitchExhaustedRoutes = Router();
+export const justData = Router();
 
-mergeConcatSwitchExhaustedRoutes.get('/users/:id', async (req: Request, res: Response): Promise<void> => {
+justData.get('/data-with-delay/:id', async (req: Request, res: Response): Promise<void> => {
     const id = req.params.id;
 
     if (id === '1') {
@@ -28,6 +28,35 @@ mergeConcatSwitchExhaustedRoutes.get('/users/:id', async (req: Request, res: Res
     }
     if (id === '4') {
         await wait(2000);
+        res.status(200).send({
+            id: 4,
+            name: 'Четвёртый'
+        });
+    }
+});
+
+justData.get('/data/:id', async (req: Request, res: Response): Promise<void> => {
+    const id = req.params.id;
+
+    if (id === '1') {
+        res.status(200).send({
+            id: 1,
+            name: 'Первый'
+        });
+    }
+    if (id === '2') {
+        res.status(200).send({
+            id: 2,
+            name: 'Второй'
+        });
+    }
+    if (id === '3') {
+        res.status(200).send({
+            id: 3,
+            name: 'Третий'
+        });
+    }
+    if (id === '4') {
         res.status(200).send({
             id: 4,
             name: 'Четвёртый'
